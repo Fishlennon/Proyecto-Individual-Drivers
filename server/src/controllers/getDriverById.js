@@ -1,9 +1,13 @@
+const { INTEGER } = require('sequelize');
 const {Driver, Team} = require('../db')
 const axios = require('axios');
 
 const getDriverById = async (req, res) =>{
     try {
         const {id} = req.params;
+
+        if(!Number.isInteger(Number(id))/*!isNaN(id)*/){
+
 
         const driverDB = await Driver.findByPk(id, {include: Team})
 
@@ -14,7 +18,7 @@ const getDriverById = async (req, res) =>{
             })
             
         }
- 
+    }
         const {data} = await axios.get(`http://localhost:5000/drivers/${id}`);
 
 
@@ -30,7 +34,7 @@ const getDriverById = async (req, res) =>{
                 image : data.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
                 nationality : data.nationality,
                 birthdate : data.dob,
-                // teams: data.teams,
+                teams: data.teams.split(',')
             }
             return res.status(200).json(driver);
         }

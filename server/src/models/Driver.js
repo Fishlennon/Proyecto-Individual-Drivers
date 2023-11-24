@@ -5,12 +5,12 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Driver', {
     id:{
-      // type:DataTypes.UUID,
-      // primaryKey:true,
-      // defaultValue: DataTypes.UUIDV4
-      type:DataTypes.INTEGER,
+      type:DataTypes.UUID,
       primaryKey:true,
-      autoIncrement:true
+      defaultValue: DataTypes.UUIDV4
+      // type:DataTypes.INTEGER,
+      // primaryKey:true,
+      // autoIncrement:true
   },
     name: {
       type: DataTypes.STRING,

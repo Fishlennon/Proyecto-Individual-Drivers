@@ -39,7 +39,7 @@ const getDriverQuery = async (req, res) =>{
 
                 const {data} = await axios.get(`http://localhost:5000/drivers?name.forename=${name}`);
 
-                console.log(data);
+            
                
                 if(data.length > 0) {
                     const drivers = data.map((driver) => ({

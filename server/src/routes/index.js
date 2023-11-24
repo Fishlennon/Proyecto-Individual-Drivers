@@ -9,8 +9,8 @@ const router = Router();
 
 
 router.get('/drivers', getDrivers)
+// router.get('/drivers', getDriverQuery)
 router.get('/drivers/:id', getDriverById)
-router.get('/drivers/', getDriverQuery)
 router.post('/drivers', postDriver)
 router.get('/teams', getTeams)
 
