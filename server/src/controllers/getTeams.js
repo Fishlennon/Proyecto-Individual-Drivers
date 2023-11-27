@@ -3,6 +3,7 @@ const axios = require('axios');
 const { Op, } = require("sequelize");
 
 
+
 const getTeams = async (req, res) =>{
     
     try {

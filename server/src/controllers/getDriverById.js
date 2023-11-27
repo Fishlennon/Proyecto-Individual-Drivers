@@ -34,7 +34,7 @@ const getDriverById = async (req, res) =>{
                 image : data.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
                 nationality : data.nationality,
                 birthdate : data.dob,
-                teams: data.teams.split(',')
+                teams: data.teams?.split(',') || [] 
             }
             return res.status(200).json(driver);
         }

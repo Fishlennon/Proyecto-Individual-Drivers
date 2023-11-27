@@ -82,6 +82,7 @@ const { Op, } = require("sequelize");
 
 /*************************TRAER LOS DRIVER DESDE LA API GENERAL Y TODOS, unir resultados en array**************************************************************** */
 
+
 const getDrivers = async (req, res) =>{
 
     try {
