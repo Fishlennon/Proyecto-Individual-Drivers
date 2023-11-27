@@ -122,6 +122,9 @@ const getDrivers = async (req, res) =>{
                         // teams: driver.teams,
 
             }))
+            if(allDrivers.length === 0) return  res.status(404).send({Error: 'Driver not found'})
+
+
             return res.status(200).json(allDrivers);
 
         }
@@ -131,7 +134,10 @@ const getDrivers = async (req, res) =>{
     
     
             const driverFotoDefault = data.map(driver => ({
-                ...driver,
+                name : driver.name.forename,
+                lastName : driver.name.surname,
+                nationality : driver.nationality,
+                birthdate : driver.dob,
                 image: driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png'
             }))
             

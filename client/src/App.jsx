@@ -1,14 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect  } from 'react'
+import axios from 'axios';
+import {Routes, Route, useNavigate} from 'react-router-dom'
 import './App.css'
+import Landing from './components/Landing'
+import Home from './components/Home'
+import Detail from './components/Detail';
+import Form from './components/Form';
+import Nav from './components/Nav';
+
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
-      <h1>wena</h1>
+    <Nav/>
+    <Routes>
+      <Route path='/' element = {<Landing/>}/>
+      <Route path='/home/:id' element = {<Detail/>}/>
+      <Route path='/form' element = {<Form/>}/>
+      {/* <Route path='/home' element = {<Home/>}/>
+      <Route path='/home' element = {<Home/>}/> */}
+    </Routes>
     </>
   )
 }

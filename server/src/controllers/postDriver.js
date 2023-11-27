@@ -6,8 +6,12 @@ const postDriver = async (req, res) =>{
     try {
         let {name, lastName, description, image, nationality, birthdate, teams } = req.body;
 
-        const newDriver = await Driver.create({name, lastName, description, image, nationality, birthdate})
+        const [newDriver, created] = await Driver.findOrCreate({
+            where: { name, lastName, nationality },
+            defaults: { birthdate, description, image }
+        })
 
+        if(!created) return res.status(400).send('Driver already exists')
         
         if(teams){
             // if(!Array.isArray(teams)) teams =[teams];
