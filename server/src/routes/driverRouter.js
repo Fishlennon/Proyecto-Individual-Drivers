@@ -7,48 +7,54 @@ const driverRouter = require('express').Router();
 
 
 
-driverRouter.get('/', async (req, res) =>{
-    try {
+driverRouter.get('/', getDrivers)
+// driverRouter.get('/', async (req, res) =>{
+//     try {
         
-        await getDrivers(req, res);
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
-})
+//         await getDrivers(req, res);
+//     } catch (error) {
+//         res.status(500).send({ error: error.message });
+//     }
+// })
 
 
-driverRouter.get('/:id', async (req, res) =>{
-    try {
+driverRouter.get('/:id', getDriverById)
+// driverRouter.get('/:id', async (req, res) =>{
+//     try {
         
-        await getDriverById(req, res);
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
+//         await getDriverById(req, res);
+//     } catch (error) {
+//         res.status(500).send({ error: error.message });
+//     }
 
 
-})
+// })
 
-driverRouter.post('/', async (req, res) =>{
-    try {
+driverRouter.post('/', postDriver)
+
+// driverRouter.post('/', async (req, res) =>{
+//     try {
         
-        await postDriver (req, res);
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
+//         await postDriver (req, res);
+//     } catch (error) {
+//         res.status(500).send({ error: error.message });
+//     }
 
 
-})
+// })
 
-driverRouter.delete('/:id', async (req, res) =>{
-    try {
+driverRouter.delete('/:id', deleteDriver)
+
+// driverRouter.delete('/:id', async (req, res) =>{
+//     try {
         
-        await deleteDriver(req, res);
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
+//         await deleteDriver(req, res);
+//     } catch (error) {
+//         res.status(500).send({ error: error.message });
+//     }
 
 
-})
+// })
 
 
 module.exports = driverRouter
