@@ -28,7 +28,7 @@ const getDrivers = async (req, res) =>{
                         name : driver.name,
                         lastName : driver.lastName,
                         description: driver.description,
-                        image : driver.image || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                        image : driver.image || 'https://th.bing.com/th/id/OIG.9o7Q9fgiECFzH.tWyoDV?pid=ImgGn',
                         nationality : driver.nationality,
                         birthdate : driver.birthdate,
                         teams: driver.Teams.map((team)=>team.name)
@@ -43,7 +43,7 @@ const getDrivers = async (req, res) =>{
                         lastName : driver.name.surname,
                         description: driver.description,
                         // image : driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
-                        image : driver.image.url && driver.image.url !== 'https://cdn.pixabay.com/photo/2013/07/12/15/36/motorsports-150157_960_720.png' ? driver.image.url : 'https://www.xntricracing.io/wp-content/uploads/2023/03/XNTRIC-RACER-600px.png',
+                        image : driver.image.url && driver.image.url !== 'https://cdn.pixabay.com/photo/2013/07/12/15/36/motorsports-150157_960_720.png' ? driver.image.url : 'https://th.bing.com/th/id/OIG.9o7Q9fgiECFzH.tWyoDV?pid=ImgGn',
                         nationality : driver.nationality,
                         birthdate : driver.dob,
                         teams: driver.teams?.split(',') || []
@@ -68,7 +68,7 @@ const getDrivers = async (req, res) =>{
                 lastName : driver.lastName,
                 nationality : driver.nationality,
                 birthdate : driver.birthdate,
-                image: driver.image || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                image: driver.image || 'https://th.bing.com/th/id/OIG.9o7Q9fgiECFzH.tWyoDV?pid=ImgGn',
                 teams: driver.Teams.map((team)=>team.name)
             }))
     
@@ -81,7 +81,7 @@ const getDrivers = async (req, res) =>{
                 // image: driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
                 image : driver.image.url && driver.image.url !== 
                 'https://cdn.pixabay.com/photo/2013/07/12/15/36/motorsports-150157_960_720.png' 
-                ? driver.image.url : 'https://www.xntricracing.io/wp-content/uploads/2023/03/XNTRIC-RACER-600px.png',
+                ? driver.image.url : 'https://th.bing.com/th/id/OIG.9o7Q9fgiECFzH.tWyoDV?pid=ImgGn',
                 teams: driver.teams?.split(',') || []
             }))
             

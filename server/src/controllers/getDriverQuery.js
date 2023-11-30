@@ -51,7 +51,7 @@ const getDriverQuery = async (req, res) =>{
                 name : driver.name.forename,
                 lastName : driver.name.surname,
                 description: driver.description,
-                image : driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                image : driver.image.url || 'https://th.bing.com/th/id/OIG.9o7Q9fgiECFzH.tWyoDV?pid=ImgGn',
                 nationality : driver.nationality,
                 birthdate : driver.dob,
                 // teams: data.teams,

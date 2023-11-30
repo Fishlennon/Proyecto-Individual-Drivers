@@ -25,9 +25,9 @@ const getDriverById = async (req, res) =>{
         if(data.id){
             const driver = {
                 id: data.id,
-                // driverRef: data.driverRef,
-                // number: data.number,
-                // code: data.code,
+                driverRef: data.driverRef,
+                number: data.number,
+                code: data.code,
                 name : data.name.forename,
                 lastName : data.name.surname,
                 description: data.description,

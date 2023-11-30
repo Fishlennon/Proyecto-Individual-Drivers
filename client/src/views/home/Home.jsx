@@ -80,9 +80,10 @@ const handleOrder = (event) => {
             <input type='search' placeholder='Buscar Team'  value={team} onChange={handleChange} onKeyPress={handleEnter}/>
             <button onClick={handleFilterTeams}>Buscar</button >
           
-            {filtered.length > 0 
+            {/* {filtered.length > 0 
             ?(<Cards filtered={nineDrivers}/>) 
-            : (<p>No se encontraron conductores.</p>)}
+            : (<p>No se encontraron conductores.</p>)} */}
+            <Cards filtered={nineDrivers}/>
 
             <button onClick={handlePrevPage} disabled={Page === 1}>
                  Anterior

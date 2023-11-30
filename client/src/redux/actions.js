@@ -7,6 +7,11 @@ import axios from "axios";
          try {
          const endpoint = `http://localhost:3001/drivers${name ? `?name=${name}` : ''}`;
          const {data}= await axios.get(endpoint)
+         
+         if(data.length === 0){
+            throw Error('Driver no encontrado');
+            
+         }
             return dispatch({
                type: 'GET_DRIVERS',
                payload: data,
@@ -18,6 +23,12 @@ import axios from "axios";
       }
       
    } 
+}
+
+ export const getDriverById =  (query) => {
+   return{
+      type: "GET_DRIVER_BY_ID", payload: query
+  } 
 
 };
  export const getTeams =  (name) => {

@@ -94,6 +94,33 @@ const reducer = (state = initialState, action) =>{
             ...state,
             filtered: allDriversFilter
         }
+        case "GET_DRIVER_BY_ID":
+            const idSearch = action.payload;
+            console.log(idSearch)
+            if(!idSearch){
+                return{
+                    ...state,
+                    filtered: state.allDrivers
+                }
+            }
+           
+            const allIdFilter = state.allDrivers.filter((driver)=>{
+                return String(driver.id) === String(idSearch).toLowerCase();
+            })
+            
+            if(allIdFilter.length === 0){
+                alert(`No drivers found for ${idSearch}`)
+                return {
+                    ...state,
+                    filtered: state.filtered 
+                };
+            }  
+
+
+        return{
+            ...state,
+            filtered: allIdFilter
+        }
         
 
             
