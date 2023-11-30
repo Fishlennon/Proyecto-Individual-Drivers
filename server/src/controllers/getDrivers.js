@@ -2,83 +2,6 @@ const {Driver, Team} = require('../db')
 const axios = require('axios');
 const { Op, } = require("sequelize");
 
-/***********************************SOLO TRAER TODOS LOS CONDUCTORES**************************************************** */
-
-// const getDrivers = async (req, res) =>{
-
-//     try {
-//         const { data} = await  axios.get('http://localhost:5000/drivers')
-
-
-
-//         const driverFotoDefault = data.map(driver => ({
-//             ...driver,
-//             image: driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png'
-//         }))
-        
-//         res.status(200).json(driverFotoDefault)
-        
-//     } catch (error) {
-//         return res.status(500).send(error.message)
-//     }
-// }
-
-/********************************************TRAER LOS DRIVER DESDE LA API QUERY Y TODOS********************************************************************* */
-
-// const getDrivers = async (req, res) =>{
-
-//     try {
-//         const { name } = req.query;
-//         console.log(name)
-
-//         if(name){
-            
-//             const {data} = await axios.get(`http://localhost:5000/drivers?name.forename=${name}`);
-
-            
-               
-//                 if(data.length > 0) {
-//                     const drivers = data.map((driver) => ({
-
-//                 id: driver.id,
-//                 // driverRef: data.driverRef,
-//                 // number: data.number,
-//                 // code: data.code,
-//                 name : driver.name.forename,
-//                 lastName : driver.name.surname,
-//                 description: driver.description,
-//                 image : driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
-//                 nationality : driver.nationality,
-//                 birthdate : driver.dob,
-//                 // teams: data.teams,
-
-
-
-//             }))
-//             return res.status(200).json(drivers);
-
-//         }
-//         }
-
-//         else {
-
-//             const { data} = await  axios.get('http://localhost:5000/drivers')
-    
-    
-    
-//             const driverFotoDefault = data.map(driver => ({
-//                 ...driver,
-//                 image: driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png'
-//             }))
-            
-//             res.status(200).json(driverFotoDefault)
-//         }
-        
-//     } catch (error) {
-//         return res.status(500).send(error.message)
-//     }
-// }
-
 
 /*************************TRAER LOS DRIVER DESDE LA API GENERAL Y TODOS, unir resultados en array**************************************************************** */
 
@@ -93,23 +16,25 @@ const getDrivers = async (req, res) =>{
 
         if(name){
 
-        const driverDB = await Driver.findAll({where:{name:{[Op.iLike]: `%${name}%`}}, include: Team, limit: 15})
-        
-        // const driverSinFoto = driverDB.map((driver)=>({
-        //     ...driver.toJSON(), 
-        //     image: driver.image || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png'}))
-
-
-        // if(driverDB.length > 0) {
-        //     return res.status(200).json(driverDB.map((driver)=>({
-        //         ...driver.toJSON(), 
-        //         image: driver.image || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png'})));
-        // }
+        const driverDBName = await Driver.findAll({where:{name:{[Op.iLike]: `%${name}%`}}, include: Team, limit: 15})
                                        
-         const driverAPI = data.filter(driver => driver.name.forename.toLowerCase().includes(name.toLowerCase()));
-        // const driverAPI = data.filter(driver => driver.name.forename == name);
+         const driverAPIName = data.filter(driver => driver.name.forename.toLowerCase().includes(name.toLowerCase()));
         
-                   const allDrivers = [...driverDB, ...driverAPI].slice(0,15).map(driver=>({
+                   const driverDBName2 = driverDBName.map(driver=>({
+                        id: driver.id,
+                        // driverRef: driver.driverRef,
+                        // number: driver.number,
+                        // code: driver.code,
+                        name : driver.name,
+                        lastName : driver.lastName,
+                        description: driver.description,
+                        image : driver.image || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                        nationality : driver.nationality,
+                        birthdate : driver.birthdate,
+                        teams: driver.Teams.map((team)=>team.name)
+
+            }))
+                   const driverAPI2 = driverAPIName.map(driver=>({
                         id: driver.id,
                         // driverRef: driver.driverRef,
                         // number: driver.number,
@@ -117,12 +42,16 @@ const getDrivers = async (req, res) =>{
                         name : driver.name.forename,
                         lastName : driver.name.surname,
                         description: driver.description,
-                        image : driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                        // image : driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                        image : driver.image.url && driver.image.url !== 'https://cdn.pixabay.com/photo/2013/07/12/15/36/motorsports-150157_960_720.png' ? driver.image.url : 'https://www.xntricracing.io/wp-content/uploads/2023/03/XNTRIC-RACER-600px.png',
                         nationality : driver.nationality,
                         birthdate : driver.dob,
-                        // teams: driver.teams,
+                        teams: driver.teams?.split(',') || []
 
             }))
+
+            const allDrivers = [...driverDBName2, ...driverAPI2].slice(0,15)
+
             if(allDrivers.length === 0) return  res.status(404).send({Error: 'Driver not found'})
 
 
@@ -132,17 +61,31 @@ const getDrivers = async (req, res) =>{
         
 
         else {  
+            const allDriverDB = await Driver.findAll({include: Team})
+            const allDriverDBMap = allDriverDB.map(driver =>({
+                id: driver.id,
+                name : driver.name,
+                lastName : driver.lastName,
+                nationality : driver.nationality,
+                birthdate : driver.birthdate,
+                image: driver.image || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                teams: driver.Teams.map((team)=>team.name)
+            }))
     
-    
-            const driverFotoDefault = data.map(driver => ({
+            const driversApi = data.map(driver => ({
+                id: driver.id,
                 name : driver.name.forename,
                 lastName : driver.name.surname,
                 nationality : driver.nationality,
                 birthdate : driver.dob,
-                image: driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png'
+                // image: driver.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                image : driver.image.url && driver.image.url !== 
+                'https://cdn.pixabay.com/photo/2013/07/12/15/36/motorsports-150157_960_720.png' 
+                ? driver.image.url : 'https://www.xntricracing.io/wp-content/uploads/2023/03/XNTRIC-RACER-600px.png',
+                teams: driver.teams?.split(',') || []
             }))
             
-            res.status(200).json(driverFotoDefault)
+            res.status(200).json([...allDriverDBMap, ...driversApi])
         }
         
     } catch (error) {

@@ -1,66 +1,102 @@
-import { addFav, removeFav } from "./actions";
+import { getDrivers } from "./actions";
 
 
-const initialState = {
-    myFavorites: [],
-    allCharacters: []
+const initialState = { 
+    allDrivers: [],
+    filtered: [],
+    allTeams: []
 };
 
 const reducer = (state = initialState, action) =>{
     switch (action.type) {
-        // case "ADD_FAV":
-        //     return{
-        //         ...state,
-        //         allCharacters: [...state.allCharacters, action.payload],
-        //        myFavorites: [...state.allCharacters, action.payload]
-        //     }
-        case 'ADD_FAV':
-      return { ...state, 
-        myFavorites: action.payload, 
-        allCharacters: action.payload };
-        // case "REMOVE_FAV": 
-        // const filteredFavs= state.allCharacters.filter((fav) => fav.id !== Number(action.payload))
-        //     return{
-        //         ...state,
-        //         myFavorites: filteredFavs,
-        //         allCharacters: filteredFavs
-                
-        //     }
-        case 'REMOVE_FAV':
-      return { ...state, 
-        myFavorites: action.payload,
-        allCharacters: action.payload };
-        
-        case "FILTER":
-            // let orderCopy = [...state.allCharacters]
+        case 'GET_DRIVERS':
+      return { 
+        ...state, 
+        allDrivers: action.payload,
+        filtered: action.payload
+    };
+        case 'GET_TEAMS':
+      return { 
+        ...state, 
+        allTeams: action.payload };
+            
+        case "FILTER_ORIGIN":
             if(action.payload==="ALL") return {
-                ...state,
-                myFavorites: state.allCharacters
+                ...state, 
+                filtered: state.allDrivers
             }
-            const filteredCharacters = state.allCharacters.filter((char) => char.gender === action.payload)
+            else if(action.payload==="API") {
+            const filteredDrivers = state.allDrivers.filter((drv) =>typeof drv.id === 'number')
             return{
                 ...state,
-                myFavorites: filteredCharacters
-            }
-        case "ORDER":
-            let copyMyFav= [...state.myFavorites]
-            if (action.payload==="A"){
-                copyMyFav.sort((a,b) => {
+                filtered: filteredDrivers
+            }}
+            else if(action.payload==="DB") {
+            const filteredDrivers = state.allDrivers.filter((drv) =>typeof drv.id === 'string')
+            return{
+                ...state,
+                filtered: filteredDrivers
+            }}
+
+        case "ORDER_DRIVERS":
+            let copyAllDrivers= [...state.filtered]
+            if (action.payload==="NA"){
+                copyAllDrivers.sort((a,b) => {
                     if(a.name>b.name) return 1;
                     else return -1;
                 })
             }
-        else if (action.payload==="D"){
-            copyMyFav.sort((a,b) => {
+        else if (action.payload==="ND"){
+            copyAllDrivers.sort((a,b) => {
                 if(a.name < b.name) return 1;
                 else return -1;
             })
         }
+        else if (action.payload==="FNA"){
+            copyAllDrivers.sort((a,b) => {
+                const dateA = new Date(a.birthdate);
+                const dateB = new Date(b.birthdate);
+                return dateA - dateB;
+            })
+        }
+        else if (action.payload==="FND"){
+            copyAllDrivers.sort((a,b) => {
+                const dateA = new Date(a.birthdate);
+                const dateB = new Date(b.birthdate);
+                return dateB - dateA;
+            })
+        }
             return{
                 ...state,
-                myFavorites: copyMyFav
+                filtered: copyAllDrivers
             }
-    
+        case "FILTER_TEAMS":
+            const teamSearch = action.payload.toLowerCase();
+            if(teamSearch===''){
+                return{
+                    ...state,
+                    filtered: state.allDrivers
+                }
+            }
+           
+            const allDriversFilter = state.allDrivers.filter((driver)=>driver.teams.some(team=> team.trim().toLowerCase() === teamSearch.toLowerCase()) );
+            
+            if(allDriversFilter.length === 0){
+                alert(`No teams found for ${teamSearch.toLowerCase()}`)
+                return {
+                    ...state,
+                    filtered: state.filtered 
+                };
+            }  
+
+
+        return{
+            ...state,
+            filtered: allDriversFilter
+        }
+        
+
+            
         default:
             return {...state}
     }

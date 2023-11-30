@@ -1,0 +1,11 @@
+.cards-container {
+    width: 90vw;
+    margin: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Máximo de 3 columnas, con un ancho mínimo de 300px */
+  gap: 20px; 
+  justify-content: center; /* Centra la cuadrícula horizontalmente */
+  margin: 0 auto;
+}
