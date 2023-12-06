@@ -1,8 +1,21 @@
-.root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.root-app {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  
   text-align: center;
-  background-color: hsl(180, 40%, 60%)
+  padding-top: 0%;
+  background-image: url('https://r4.wallpaperflare.com/wallpaper/115/947/681/formula-1-force-india-f1-team-yas-marina-circuit-abu-dhabi-wallpaper-49c0f80d914add4ba697281f4011862d.jpg');
+  background-attachment: fixed; 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 }
 

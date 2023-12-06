@@ -1,0 +1,36 @@
+.landing-container {
+    position: relative;
+    text-align: center;
+  
+}
+  
+  .ingresar-button {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 550%);
+    background-color: rgb(252 144 5);
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .background-image {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 400px; 
+    position: absolute;
+    top: 10%; 
+    left: 50%;
+    transform: translateX(-50%);
+  }

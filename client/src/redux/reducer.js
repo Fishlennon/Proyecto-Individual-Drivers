@@ -13,6 +13,15 @@ const reducer = (state = initialState, action) =>{
       return { 
         ...state, 
         allDrivers: action.payload,
+        // filtered: allDrivers
+        filtered: state.filtered.length > 0 ? state.filtered : action.payload,
+    };
+        case 'GET_DRIVERS_BY_NAME':
+             if(!action.payload){
+            return window.alert('Driver no encontrado');
+            }
+          return { 
+        ...state, 
         filtered: action.payload
     };
         case 'GET_TEAMS':
@@ -82,7 +91,7 @@ const reducer = (state = initialState, action) =>{
             const allDriversFilter = state.allDrivers.filter((driver)=>driver.teams.some(team=> team.trim().toLowerCase() === teamSearch.toLowerCase()) );
             
             if(allDriversFilter.length === 0){
-                alert(`No teams found for ${teamSearch.toLowerCase()}`)
+                alert(`No hay teams con el nombre: ${teamSearch.toLowerCase()}`)
                 return {
                     ...state,
                     filtered: state.filtered 
@@ -96,7 +105,7 @@ const reducer = (state = initialState, action) =>{
         }
         case "GET_DRIVER_BY_ID":
             const idSearch = action.payload;
-            console.log(idSearch)
+            
             if(!idSearch){
                 return{
                     ...state,
@@ -107,9 +116,8 @@ const reducer = (state = initialState, action) =>{
             const allIdFilter = state.allDrivers.filter((driver)=>{
                 return String(driver.id) === String(idSearch).toLowerCase();
             })
-            
             if(allIdFilter.length === 0){
-                alert(`No drivers found for ${idSearch}`)
+                alert(`No hay drivers con el id: ${idSearch}`)
                 return {
                     ...state,
                     filtered: state.filtered 
@@ -121,8 +129,20 @@ const reducer = (state = initialState, action) =>{
             ...state,
             filtered: allIdFilter
         }
-        
-
+        case "POST_DRIVER":
+            return {
+                ...state,
+                filtered: [...state.allDrivers, action.payload]
+            }
+        case "RESET_FILTERED":
+         return {
+             ...state,
+            filtered: state.allDrivers
+  };    
+        case "DELETE_DRIVER":
+            return {
+              ...state,
+            };
             
         default:
             return {...state}

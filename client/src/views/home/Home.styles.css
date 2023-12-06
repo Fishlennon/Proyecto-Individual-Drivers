@@ -1,5 +1,38 @@
 .home{
-    padding-top: 60px;
+    /* padding-top: 60px; */
     margin: 3%;
     padding: 3%;
+    
 }
+
+.button-home {
+    background-color: rgb(157 154 125);
+    color: #080505;
+    padding: 5px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+.span {
+    color: #e7b842;
+}
+
+.select {
+    padding: 2px;
+    margin: 1%;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+  }
+.input-home {
+    padding: 2px;
+    margin: 1%;
+    font-size: 14px;
+    border: 1px solid #ccc;
+   
+   
+  }

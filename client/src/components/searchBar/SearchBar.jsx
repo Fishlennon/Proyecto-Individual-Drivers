@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { getDriverById, getDrivers } from '../../redux/actions';
+import { filterTeams, getDriverById, getDrivers, getDriversByName, resetFiltered } from '../../redux/actions';
+import './SearchBar.styles.css';
 
 const SearchBar = () => {
    const dispatch = useDispatch();
@@ -31,22 +32,25 @@ const SearchBar = () => {
    const onSearch= (query)=> {
       const esUuid = isValidUUID(query)
       if(esUuid) {
+         // dispatch(resetFiltered());
          dispatch(getDriverById(query));
       }
       else  {
          const idInteger = Number.isInteger(Number(query))
          if (idInteger) {
+            // dispatch(resetFiltered());
             dispatch(getDriverById(query));
          } else {
-            dispatch(getDrivers(query));
+            dispatch(getDriversByName(query));
+            // dispatch(filterTeams(query.toLowerCase()));
          }
       }
       }
 
    return (
-      <div>
-         <input type='search' onChange={handleChange} value={query}/>
-         <button onClick={Search}>Buscar</button>
+      <div className='searchBar-containter'>
+         <input type='search' onChange={handleChange} value={query} placeholder='Ingrese nombre o id' className='search-input'/>
+         <button onClick={Search} className='button'>Buscar</button>
          
       </div>
    );

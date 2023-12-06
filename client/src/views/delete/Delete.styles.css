@@ -1,0 +1,10 @@
+.delete-container {
+  margin-top: 120px; 
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 100px;
+  background-color: rgba(245, 245, 245, 0.769);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+  }

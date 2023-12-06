@@ -1,0 +1,33 @@
+.detail-container{
+    background-color: #a07f2669;
+    border: 2px solid #000;
+    border-radius: 100px;
+    padding: 100px;
+    margin: 4% ;
+    text-align: center;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+}
+
+  
+  .detail-img {
+    max-width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .detail-h1 {
+    font-style: initial;
+    font-size: 50px;
+    color: #0d0c07;
+  }
+  
+  .detail-h2 {
+    font-style: italic;
+    color: rgb(255, 255, 255)
+  }
+  
+  

@@ -1,12 +1,13 @@
 import {Link } from "react-router-dom"
+import './Landing.styles.css';
 
 const Landing = ()=> {
     return(
-        <div>
-            <h1>landing</h1>
-            <img src="https://previews.123rf.com/images/ssuaphoto/ssuaphoto1202/ssuaphoto120200009/12156980-coche-de-f%C3%B3rmula-uno-con-el-camino-aislado-sobre-fondo-blanco.jpg" alt="" />
+        <div className="landing-container">
+            <img className="logo" src="https://hips.hearstapps.com/autoweek/assets/s3fs-public/DPkZATWXUAAnsCz.jpg" alt="" />
+            <img className="background-image" src="https://r4.wallpaperflare.com/wallpaper/437/769/272/mclaren-mclaren-p1-lm-mclaren-f1-lm-orange-cars-supercars-hd-wallpaper-2930b80d514acd7b96d7580f805196dd.jpg" alt="" />
             <Link to='/home' className=''>
-                <button className=''>INGRESAR</button>
+                <button className='ingresar-button'>INGRESAR</button>
             </Link>
         </div>
     )

@@ -1,15 +1,31 @@
 .card-container{
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: rgba(0, 0, 0, 0.63);
     border: 1px solid #ddd;
     padding: 10px;
     width: 320px; 
     height: 600px; 
     margin: 10px;
+    border-radius: 50px;
 }
-.image {
+.card-image {
     width: 100%; 
     height: 60%; 
+    border-radius: 150px;
     
+  }
+
+  .h2{
+    color: #dddbd6;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    
+  }
+
+  .h3{
+    color: #dddbd6;
+  }
+  .link {
+    text-decoration: none;
   }

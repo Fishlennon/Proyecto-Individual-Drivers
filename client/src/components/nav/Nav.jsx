@@ -10,13 +10,19 @@ const Nav = ()=> {
 
     return(
         <div className="nav">
-            <SearchBar/>
+            <SearchBar/ >
             
             <Link to='/' className=''>
-                <button className=''>landing</button>
+                <button className='button'>Inicio</button>
+            </Link>
+            <Link to='/home' className=''>
+                <button className='button'>Home</button>
             </Link>
             <Link to='/form' className=''>
-                <button className=''>Crear Driver</button>
+                <button className='button'>Crear Driver</button>
+            </Link>
+            <Link to='/delete' className=''>
+                <button className='button'>Eliminar driver BD</button>
             </Link>
         </div>
     )

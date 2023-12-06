@@ -7,6 +7,7 @@ const Cards = ({filtered})=> {
             {
                 filtered.map(({id, name, lastName, nationality, birthdate, image, teams})=>{
                     return <Card
+                    id= {id}
                     key={id}
                     name={name}
                     lastName={lastName}

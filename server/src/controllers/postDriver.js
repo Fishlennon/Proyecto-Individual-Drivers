@@ -15,14 +15,15 @@ const postDriver = async (req, res) =>{
         
         if(teams){
             // if(!Array.isArray(teams)) teams =[teams];
-            teams = Array.isArray(teams) ? teams : [teams];
+            teams = Array.isArray(teams) ? teams : [...teams];
+            
             
             const teamsFind = await Team.findAll({where:{name:{[Op.in]: teams}}});
             
             await newDriver.setTeams(teamsFind);
         }
     
-        res.status(200).send(newDriver);
+        res.status(200).send('Driver creado con exito');
 
 
     } catch (error) {

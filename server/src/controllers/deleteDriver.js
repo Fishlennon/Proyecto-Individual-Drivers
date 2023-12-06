@@ -9,7 +9,7 @@ const deleteDriver = async (req, res) => {
 
      await Driver.destroy({where: {id: id}});
 
-        res.status(200).send('Driver Eliminated');
+        res.status(200).json({ message: 'Driver Eliminated successfully' });
     } catch (error) {
         res.status(400).json({error: error.message});
     }

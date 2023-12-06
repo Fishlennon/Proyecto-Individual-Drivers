@@ -18,7 +18,8 @@ const getDrivers = async (req, res) =>{
 
         const driverDBName = await Driver.findAll({where:{name:{[Op.iLike]: `%${name}%`}}, include: Team, limit: 15})
                                        
-         const driverAPIName = data.filter(driver => driver.name.forename.toLowerCase().includes(name.toLowerCase()));
+        //  const driverAPIName = data.filter(driver => driver.name.forename.toLowerCase().includes(name.toLowerCase())); // trae todo lo que incluya el nombre 
+         const driverAPIName = data.filter(driver => driver.name.forename.toLowerCase() === name.toLowerCase());
         
                    const driverDBName2 = driverDBName.map(driver=>({
                         id: driver.id,

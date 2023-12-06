@@ -14,13 +14,14 @@ const getDriverById = async (req, res) =>{
         if(driverDB){
               return  res.status(200).json({
                 ...driverDB.toJSON(),
-                image: driverDB.image || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png'
+                image : driverDB.image && driverDB.image !== 'https://cdn.pixabay.com/photo/2013/07/12/15/36/motorsports-150157_960_720.png' ? driverDB.image : 'https://th.bing.com/th/id/OIG.9o7Q9fgiECFzH.tWyoDV?pid=ImgGn',
+                teams: driverDB.Teams.map((team)=>team.name)
             })
             
         }
     }
         const {data} = await axios.get(`http://localhost:5000/drivers/${id}`);
-
+    
 
         if(data.id){
             const driver = {
@@ -31,7 +32,7 @@ const getDriverById = async (req, res) =>{
                 name : data.name.forename,
                 lastName : data.name.surname,
                 description: data.description,
-                image : data.image.url || 'https://forblitz.ru/wp-content/uploads/2021/12/1-4.png',
+                image : data.image.url && data.image.url !== 'https://cdn.pixabay.com/photo/2013/07/12/15/36/motorsports-150157_960_720.png' ? data.image.url : 'https://th.bing.com/th/id/OIG.9o7Q9fgiECFzH.tWyoDV?pid=ImgGn',
                 nationality : data.nationality,
                 birthdate : data.dob,
                 teams: data.teams?.split(',') || [] 
