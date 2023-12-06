@@ -1,0 +1,25 @@
+.gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  
+  .gallery img {
+    width: 100%;
+    /* padding-left: 10%; */
+    height: auto;
+    max-height: 600px;
+    border-radius: 8px; 
+    transition: transform 0.3s ease; 
+    border: 4px solid #fff;
+    justify-content: center;
+  }
+  
+  .gallery img:hover {
+    transform: scale(1.1); 
+  }
+
+  .p-gallery{
+    color: rgb(4, 0, 255);
+    border-radius: black;
+  }

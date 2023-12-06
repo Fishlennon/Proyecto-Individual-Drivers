@@ -17,14 +17,19 @@ const filtered = useSelector((state)=>state.filtered)
 
 const [Page, setPage] = useState(1);
 const perPage = 9;
-const startDr = (Page - 1) * perPage;
-const endDr= startDr + perPage;
-const nineDrivers = filtered.slice(startDr, endDr);
+const startSlice = (Page - 1) * perPage;
+const endSlice= startSlice + perPage;
+const nineDrivers = filtered.slice(startSlice, endSlice);
 const [team, setTeam] = useState('')
 
-useEffect(()=>{
-    dispatch(getDrivers());
-},[])
+// useEffect(()=>{
+//     dispatch(getDrivers());
+// },[])
+useEffect(() => {
+    if (!allDrivers.length) {
+        dispatch(getDrivers());
+    }
+}, [dispatch, allDrivers]);
 
 const handleNextPage = () => {
     setPage((prevPage) => Math.min(prevPage + 1, Math.ceil(allDrivers.length/9)));
@@ -43,10 +48,6 @@ const handleFilter = (event) => {
 }
 const handleFilterTeams = () => {
     setPage(1);
-    // if (team.trim() === "") {
-        
-    //    return;
-    //   }
     dispatch(filterTeams(team))
     setTeam('')
   };

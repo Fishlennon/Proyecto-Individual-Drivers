@@ -1,13 +1,15 @@
 export const validateName = (value) => {
+ 
     if (!value) {
       return 'Ingrese un nombre';
     }
+    
   
     if (typeof value !== 'string') {
       return 'El nombre debe ser texto';
     }
   
-    if (!/^[A-Z][A-Za-z0-9 .,;:'"(){}[\]_-]{2,19}$/.test(value)) {
+    if (!/^[A-Z][A-Za-z .,;:'"(){}[\]_-]{2,19}$/.test(value)) {
       return 'El nombre debe comenzar con mayuscula y tener entre 3 y 20 caracteres';
     }
   

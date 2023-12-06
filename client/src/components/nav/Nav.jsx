@@ -18,6 +18,9 @@ const Nav = ()=> {
             <Link to='/home' className=''>
                 <button className='button'>Home</button>
             </Link>
+            <Link to='/gallery' className=''>
+                <button className='button'>Gallery</button>
+            </Link>
             <Link to='/form' className=''>
                 <button className='button'>Crear Driver</button>
             </Link>

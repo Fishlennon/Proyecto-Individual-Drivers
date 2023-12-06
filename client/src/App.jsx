@@ -8,6 +8,7 @@ import Detail from './views/detail/Detail';
 import Form from './views/form/Form';
 import Nav from './components/nav/Nav';
 import Delete from './views/delete/delete';
+import Gallery from './views/gallery/Gallery';
 
 
 
@@ -27,6 +28,7 @@ function App() {
       <Route path='/home/:id' element = {<Detail/>}/>
       <Route path='/form' element = {<Form/>}/>
       <Route path='/delete' element = {<Delete/>}/>
+      <Route path='/gallery' element = {<Gallery/>}/>
     </Routes>
     </div>
   )

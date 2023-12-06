@@ -10,9 +10,17 @@ const Form = ()=> {
 
     const dispatch = useDispatch()
     const [FormValid, setFormValid] = useState(false);
-    // dispatch(getTeams())
-    // const teams = useSelector((state)=>state.allTeams)
+    const allTeams = useSelector((state)=>state.allTeams)
+
+    useEffect(() => {
+      if (!allTeams.length) {
+        dispatch(getTeams());
+    }
+    
+  }, [dispatch, allTeams]);
    
+
+  
 
   const [input, setInput]= useState({
     name: '',
@@ -30,7 +38,7 @@ const Form = ()=> {
     // image: '',
     nationality:validateNat(''),
     birthdate: validateBirthdate(''),
-    teams: validateTeams(''),
+    // teams: validateTeams(''),
     description: validateDescription(''),
     // name: '',
     // lastName: '',
@@ -43,18 +51,19 @@ const Form = ()=> {
 
     const handleChange = (event) => {
 
-        setInput({
-          ...input,
-        //   [event.target.name]: event.target.value 
+      //   setInput({
+      //     ...input,
+      //   //   [event.target.name]: event.target.value 
 
-          [event.target.name]: event.target.name === 'teams' 
-          ? event.target.value.split(',').map(team => team.trim()) 
-          : event.target.value
+      //     // [event.target.name]: event.target.name === 'teams' 
+      //     // ? event.target.value.split(',').map(team => team.trim()) 
+      //     // : event.target.value
 
-      //     [event.target.name]: event.target.name === 'teams'
-      // ? Array.from(event.target.selectedOptions, (option) => option.value)
-      // : event.target.value
-      })
+      //     [event.target.name]:
+      //     event.target.name === 'teams'
+      //       ? Array.from(event.target.selectedOptions, (option) => option.value).join(',')
+      //       : event.target.value,
+      // })
 
         let error = ''
 
@@ -72,7 +81,7 @@ const Form = ()=> {
                 error = validateBirthdate(event.target.value)
                 break
             case 'teams': 
-                error = validateTeams(event.target.value)
+                error = validateTeams(updatedTeamsString)
                 break
             case 'description':  
                 error = validateDescription(event.target.value)
@@ -80,6 +89,7 @@ const Form = ()=> {
             default: 
                 break    
         }
+        
         setErrors({
             ...errors,
             [event.target.name]:error
@@ -109,6 +119,20 @@ const Form = ()=> {
         dispatch(postDriver(input))
       }
 
+      const handleSelectChange = (selectedOptions) => {
+        const selectedTeam = event.target.value;
+        let updatedTeams = input.teams.split(',');
+        if (updatedTeams.includes(selectedTeam)) {
+          updatedTeams = updatedTeams.filter((team) => team !== selectedTeam);
+        } else {
+          updatedTeams.push(selectedTeam);
+        }
+        const updatedTeamsString = updatedTeams.filter(Boolean).join(',');
+        setInput({
+          ...input,
+          teams: updatedTeamsString,
+        });
+      }
     return(
         <div >
             <form  onSubmit={handleSubmit} className='form-container'>
@@ -144,25 +168,28 @@ const Form = ()=> {
 
                 {/* <br /> */}
 
-                <label htmlFor="img" className='label'>Teams:</label>
+                <label htmlFor="teams" className='label'>Equipos:</label>
+                <select
+                 
+                  name="teams"
+                  multiple 
+                  // value={input.teams}
+                  value={input.teams.split(',')}
+                  // onChange={handleChange}
+                  onChange={(e) => handleSelectChange(e.target.selectedOptions)}
+                >
+                  {allTeams.map((team) => (
+                    <option value={team}>
+                      {team}
+                    </option>
+                  ))}
+                   </select>
+
+                {/* <label htmlFor="img" className='label'>Teams:</label> */}
                 <input className='input' type="text" id="tms" name="teams" placeholder="Teams" value={input.teams} onChange={handleChange}/>
                 <p className='error'>{errors.teams}</p>
 
-                {/* <label htmlFor="teams" className='label'>Equipos:</label>
-                <select
-                  className='input'
-                  id="tms"
-                  name="teams"
-                  multiple  // Permite seleccionar múltiples opciones
-                  value={input.teams}
-                  onChange={handleChange}
-                >
-                  {teams.map((team) => (
-                    <option key={team.id} value={team.name}>
-                      {team.name}
-                    </option>
-                  ))}
-                </select> */}
+                
 
                 {/* <br /> */}
 
